@@ -1,7 +1,8 @@
 const defaultStyle = {
   color: 'white',
   background: 'red',
-  fontSize: '10px',
+  radius: 10,
+  fontSize: '12px',
   fontFamily: 'Arial',
   fontWeight: 'bold',
 };
@@ -9,19 +10,15 @@ const defaultStyle = {
 class BadgeGenerator {
   constructor(win, styleOpts = {}) {
     this.win = win;
-    this.style = Object.assign({}, defaultStyle, styleOpts);
+    this.style = {...defaultStyle, ...styleOpts};
 
     this.win.webContents.executeJavaScript(
       `window.drawBadge = function ${this.drawBadge};`,
     );
   }
 
-  generate(count) {
-    if (!count) {
-      throw new Error('Badge number invalid number or least 1');
-    }
-
-    const styleOpts = JSON.stringify(this.style);
+  generate(count, opts) {
+    const styleOpts = JSON.stringify({...this.style, ...opts});
 
     return this.win.webContents.executeJavaScript(
       `window.drawBadge(${count}, ${styleOpts});`,
@@ -29,11 +26,15 @@ class BadgeGenerator {
     );
   }
 
-  drawBadge(count, {color, background, fontSize, fontFamily, fontWeight}) {
+  drawBadge(
+    count,
+    {color, background, radius, fontSize, fontFamily, fontWeight},
+  ) {
     count = parseInt(count, 10);
 
-    const badgeSvg = `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
-      <circle cx="8" cy="8" r="8" fill="${background}" />
+    const badgeSvg = `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="${radius *
+      2}" height="${radius * 2}">
+      <circle cx="${radius}" cy="${radius}" r="${radius}" fill="${background}" />
       <text x="50%" y="50%" text-anchor="middle" fill="${color}" font-size="${fontSize}" font-family="${fontFamily}" font-weight="${fontWeight}" dy=".3em">${count}</text>
     </svg>`;
 
@@ -42,7 +43,7 @@ class BadgeGenerator {
     const DOMURL = self.URL || self.webkitURL;
 
     const img = new Image();
-    const svg = new Blob([svgString], {type: 'image/svg+xml;charset=utf-8'});
+    const svg = new Blob([badgeSvg], {type: 'image/svg+xml;charset=utf-8'});
     const url = DOMURL.createObjectURL(svg);
 
     return new Promise((resolve, reject) => {

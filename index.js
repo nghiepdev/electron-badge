@@ -15,9 +15,9 @@ class Badge {
   }
 
   initListeners() {
-    ipcMain.on(UPDATE_BADGE_EVENT, (event, count) => {
+    ipcMain.on(UPDATE_BADGE_EVENT, (event, ...args) => {
       if (this.win) {
-        this.updateBadge(count);
+        this.updateBadge.apply(this, args);
       }
     });
 
@@ -34,9 +34,13 @@ class Badge {
     }
   }
 
-  updateBadgeWindows(count) {
+  updateBadgeWindows(count, opts) {
+    if (!count) {
+      return this.win.setOverlayIcon(null, badgeDescription);
+    }
+
     this.generator
-      .generate(count)
+      .generate(count, opts)
       .then(image => {
         this.win.setOverlayIcon(
           nativeImage.createFromBuffer(image),
@@ -52,9 +56,9 @@ class Badge {
       });
   }
 
-  updateBadge(count) {
+  updateBadge(count, opts) {
     if (process.platform === 'win32' || process.windowsStore === true) {
-      this.updateBadgeWindows(count);
+      this.updateBadgeWindows(count, opts);
     } else {
       this.updateBadgeUnix(count);
     }
