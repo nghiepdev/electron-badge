@@ -13,6 +13,38 @@ $ yarn add electron-badge
 
 ## Usage
 
+```js
+// main.js
+
+const Badge = require('electron-badge');
+
+function createWindow() {
+  win = new BrowserWindow({width: 800, height: 600});
+  const badgeOptions = {};
+  new Badge(win, badgeOptions);
+}
+```
+
+```js
+// index.html
+ipcRenderer.send('update-badge', 5);
+
+// To remove badge
+ipcRenderer.send('update-badge', 0); // or null
+```
+
+## API
+
+**Badge options**
+
+| Option Name   | Default Value |
+| ------------- | ------------- |
+| `color`       | white         |
+| `backaground` | red           |
+| `fontSize`    | 11px          |
+| `fontFamily`  | Arial         |
+| `fontWeight`  | 'bold'        |
+
 ## License
 
 MIT © [Nghiep](https://nghiepit.dev)
