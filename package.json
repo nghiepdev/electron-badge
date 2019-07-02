@@ -1,0 +1,27 @@
+{
+  "name": "electron-badge",
+  "version": "0.1.0",
+  "description": "Electron badge works well for Windows",
+  "keywords": [
+    "electron",
+    "windows",
+    "badge"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "electron": ">= 3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nghiepit/electron-badge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nghiepit/electron-badge/issues"
+  },
+  "homepage": "https://github.com/nghiepit/electron-badge",
+  "author": "Nghiep <me@nghiepit.dev>",
+  "license": "MIT"
+}
