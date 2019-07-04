@@ -35,7 +35,7 @@ ipcRenderer.send('update-badge', 0); // or null
 
 ## API
 
-**Badge options**
+**Badge options(Windows only)**
 
 | Option Name   | Default Value |
 | ------------- | ------------- |
@@ -44,7 +44,7 @@ ipcRenderer.send('update-badge', 0); // or null
 | `radius`      | 10            |
 | `fontSize`    | 12px          |
 | `fontFamily`  | Arial         |
-| `fontWeight`  | 'bold'        |
+| `fontWeight`  | bold          |
 
 ## License
 

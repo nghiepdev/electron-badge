@@ -46,9 +46,12 @@ class BadgeGenerator {
     const svg = new Blob([badgeSvg], {type: 'image/svg+xml;charset=utf-8'});
     const url = DOMURL.createObjectURL(svg);
 
+    canvas.width = 16;
+    canvas.height = 16;
+
     return new Promise((resolve, reject) => {
       img.onload = () => {
-        ctx.drawImage(img, 0, 0);
+        ctx.drawImage(img, 0, 0, 16, 16);
         const png = canvas.toDataURL('image/png');
 
         DOMURL.revokeObjectURL(png);

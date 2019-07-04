@@ -16,9 +16,7 @@ class Badge {
 
   initListeners() {
     ipcMain.on(UPDATE_BADGE_EVENT, (event, ...args) => {
-      if (this.win) {
-        this.updateBadge.apply(this, args);
-      }
+      this.updateBadge.apply(this, args);
     });
 
     if (this.animation) {
@@ -43,7 +41,7 @@ class Badge {
       .generate(count, opts)
       .then(image => {
         this.win.setOverlayIcon(
-          nativeImage.createFromBuffer(image),
+          nativeImage.createFromDataURL(image),
           badgeDescription,
         );
 
