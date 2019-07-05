@@ -27,7 +27,7 @@ function createWindow() {
 
 ```js
 // index.html
-ipcRenderer.send('update-badge', 5, {radius: 8});
+ipcRenderer.send('update-badge', 5, {background: 'crimson'});
 
 // To remove badge
 ipcRenderer.send('update-badge', 0); // or null
@@ -41,10 +41,10 @@ ipcRenderer.send('update-badge', 0); // or null
 | ------------- | ------------- |
 | `color`       | white         |
 | `backaground` | red           |
-| `radius`      | 10            |
 | `fontSize`    | 12px          |
 | `fontFamily`  | Arial         |
 | `fontWeight`  | bold          |
+| `max`         | 99            |
 
 ## License
 

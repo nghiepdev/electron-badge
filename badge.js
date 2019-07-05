@@ -28,14 +28,19 @@ class BadgeGenerator {
 
   drawBadge(
     count,
-    {color, background, radius, fontSize, fontFamily, fontWeight},
+    {color, background, radius, fontSize, fontFamily, fontWeight, max},
   ) {
-    count = parseInt(count, 10);
+    let countText = count;
+
+    if (max && count > max) {
+      countText = max + '+';
+      fontSize = '11px';
+    }
 
     const badgeSvg = `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="${radius *
       2}" height="${radius * 2}">
       <circle cx="${radius}" cy="${radius}" r="${radius}" fill="${background}" />
-      <text x="50%" y="50%" text-anchor="middle" fill="${color}" font-size="${fontSize}" font-family="${fontFamily}" font-weight="${fontWeight}" dy=".3em">${count}</text>
+      <text x="50%" y="50%" text-anchor="middle" fill="${color}" font-size="${fontSize}" font-family="${fontFamily}" font-weight="${fontWeight}" dy=".3em">${countText}</text>
     </svg>`;
 
     const canvas = document.createElement('canvas');
