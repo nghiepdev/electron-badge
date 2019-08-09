@@ -1,11 +1,11 @@
 {
   "name": "electron-badge",
   "version": "0.3.2",
-  "description": "Electron badge works well for Windows",
+  "description": "Electron badge works well on Windows",
   "keywords": [
     "electron",
-    "windows",
-    "badge"
+    "badge",
+    "electron-badge"
   ],
   "main": "index.js",
   "scripts": {
